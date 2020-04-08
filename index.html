@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Personal Portfolio Site</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav role='navigation' id="mainnav">
+    <br><br><br>
+  <ul class="gap">
+    <li><a href="#">HOME</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#hobbies">HOBBIES</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+    
+ 
+  </ul>
+</nav>  
+
+<div class="hamb">
+  <a href="#"><i class="fa fa-bars"></i></a>
+</div>
+
+  <div class="hero">
+      <h1>HELLO , I'm SNEHA SHETTY <br> <span>Creative and Interactive UI designer</span></h1>
+  </div>
+
+<canvas id="bubble"></canvas>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+<script>
+  
+var w = window.innerWidth,
+    h = window.innerHeight,
+    canvas = document.getElementById('bubble'),
+    ctx = canvas.getContext('2d'),
+    rate = 60,
+    arc = 100,
+    time,
+    count,
+    size = 7,
+    speed = 20,
+    lights = new Array,
+    colors = ['#d59254','#ffffff','#1f2839','#cf7693'];
+
+canvas.setAttribute('width',w);
+canvas.setAttribute('height',h);
+
+function init() {
+  time = 0;
+  count = 0;
+
+  for(var i = 0; i < arc; i++) {
+    lights[i] = {
+      x: Math.ceil(Math.random() * w),
+      y: Math.ceil(Math.random() * h),
+      toX: Math.random() * 5 + 1,
+      toY: Math.random() * 5 + 1,
+      c: colors[Math.floor(Math.random()*colors.length)],
+      size: Math.random() * size
+    }
+  }
+}
+
+function bubble() {
+  ctx.clearRect(0,0,w,h);
+
+  for(var i = 0; i < arc; i++) {
+    var li = lights[i];
+    
+    ctx.beginPath();
+    ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
+    ctx.fillStyle = li.c;
+    ctx.fill();
+    
+    li.x = li.x + li.toX * (time * 0.05);
+    li.y = li.y + li.toY * (time * 0.05);
+    
+    if(li.x > w) { li.x = 0; }
+    if(li.y > h) { li.y = 0; }
+    if(li.x < 0) { li.x = w; }
+    if(li.y < 0) { li.y = h; }
+  }
+  if(time < speed) {
+    time++;
+  }
+  timerID = setTimeout(bubble,1000/rate);
+}
+init();
+bubble(); 
+
+
+var animation = 'easeOutCubic';
+    delay     = 60;
+
+$(document)
+  .on('click', '.fa-bars', function(){
+    var i = 0;
+    $('nav').before($('#bubble'));
+    $('#bubble').fadeIn();
+    $('#mainnav').find('li').each(function(){
+      var that = $(this);
+      i++;
+      (function(i, that){
+          setTimeout(function(){
+            that
+              .animate(
+                { 'left'   : '20px' }, 
+                { duration : 350, 
+                  easing   : animation })
+              .fadeIn({queue: false});
+          }, delay * i)
+      }(i, that))
+    }); 
+    $('.fa-bars').fadeOut(100,function(){
+      $(this)
+        .removeClass('fa-bars')
+        .addClass('fa-times')
+        .fadeIn(); 
+    });
+  })
+  .on('click', '#bubble, .fa-times', function(){ 
+    $('#bubble').fadeOut();
+    $('#mainnav').find('li')
+      .animate(
+        { 'left'   : '-550px' }, 
+        { duration : 250 })
+      .fadeOut({queue: false});
+    
+    $('.hamb').fadeOut(100, function(){
+      $(this)
+        .find($('i'))
+        .removeClass('fa-times')
+        .addClass('fa-bars')
+        .end()
+        .fadeIn();
+    });
+  }) 
+    
+</script>
+
+
+<a name="about"></a>
+<div class="about-us">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="about-container">
+		<div class="circle"></div>
+		<h1>ABOUT ME</h1>
+		<p>Hi,I'm Sneha.I can say that I am a responsible and a hard-working student. Moreover, being a sociable person, I have many friends since
+ I like to communicate with people and get to know new interesting individuals. I enjoy my time at school: it is really nice to study, the students are very
+ friendly and ready to help. The atmosphere cannot but make me want to go there every time. I like to receive and deal with challenging tasks. 
+I am a very enthusiastic student and I think this is a strong point of mine.The goal I’m currently striving for is to make this world a better place to live 
+in by starting the changes with myself. Sure, I’ve had bad experiences in my
+ life too, but this is exactly what made me the way I am now: grateful, full of love, with a desire to study well because it will help me become a successful
+ person in future and have a high quality of life.
+</p>
+	</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>		
+</div>
+
+<a name="hobbies"></a>
+<div class="heading"><h1>MY HOBBIES</h1></div>
+<div class="hobbies">
+
+
+		
+	<div class="hobby-container">
+		<div class="box">
+			<div class="imgBox">
+				<img src="hobby1.jpg">
+			</div>
+			<div class="content">
+			<div>
+				<h2>Badminton</h2>
+				<p>Badminton is a racquet sport played using racquue to hit a shuttlecock acrossa net. 
+				</p>
+			</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="imgBox">
+				<img src="hobby2.jpg">
+			</div>
+			<div class="content">
+			<div>
+				<h2>Dancing</h2>
+				<p>Dancing is a whole-body workout that's actually fun. It's good for your heart,
+ it makes you stronger, and it can help with balance and coordination.
+				</p>
+			</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="imgBox">
+				<img src="hobby3.jpg">
+			</div>
+			<div class="content">
+			<div>
+				<h2>Photographing</h2>
+				<p>Photography is the art, application and practice of creating durable images by recording light or other
+ electromagnetic radiation, either electronically by means of an image sensor.
+				</p>
+			</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="imgBox">
+				<img src="hobby4.jpg">
+			</div>
+			<div class="content">
+			<div>
+				<h2>Painting</h2>
+				<p>Painting is the practice of applying paint, pigment, color or other medium[1] to a solid surface (called the "matrix" or "support"). 
+The medium is commonly applied to the base with a brush, but other implements.
+				</p>
+			</div>
+			</div>
+		</div>
+	</diV>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>	
+
+</div>
+
+<a name="projects"></a>
+
+<div class="heading1"><h1>MY PROJECTS</h1></div>
+<div class="projects">
+	
+	<div class="projects-container">
+		<div class="box">
+			<div class="imgBox">
+				<img src="project1.png">
+			</div>
+			<div class="content">
+				<div>
+					<h1>HTML,CSS & BOOTSTRAP</h1>
+				<p>This project is based on Html,Css & Bootstrap.
+				</p>
+				</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="imgBox">
+				<img src="project2.png">
+			</div>
+			<div class="content">
+				<div>
+					<h1>REACT</h1>
+				<p>This project is based on React.
+				</p>
+				</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="imgBox">
+				<img src="project3.jpg">
+			</div>
+			<div class="content">
+				<div>
+					<h1>ANGULAR</h1>
+				<p>This project is based on Angular.
+				</p>
+				</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="imgBox">
+				<img src="project4.png">
+			</div>
+			<div class="content">
+				<div>
+					<h1>ANDROID</h1>
+				<p>This project is based on Android.
+				</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	function submit(){
+		alert("Your Message has been submitted!!!!");
+	}
+</script>
+<a name="contact"></a>
+<div class="contact">
+<br><br><br><br><br><br><br><br><br>
+	<div class="header11" style="text-align:center;">
+		<h1>CONTACT ME</h1>
+		<p style="text-align:center;">Have a question or want to work together?</p>
+	</div> 
+	<br><br><br>
+	<div class="form">
+	<form>
+		<input type="text" placeholder="Name" />
+		<input type="text" placeholder="E-Mail" />
+		<input type="text" placeholder="Message" />
+	</form>
+	<button type="button" style="text-align:center;" onclick="submit()">SUBMIT</button>
+	</div>
+
+</div>
+
+</body>
+</html>
